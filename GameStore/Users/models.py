@@ -11,6 +11,7 @@ from utils.models_utils import model_image_directory_path
 class CustomUserManager(BaseUserManager):
 
 
+
     def create_user(self, email, password, phone="", **extra_fields):
 
         if not email:
@@ -43,8 +44,8 @@ class CustomUserManager(BaseUserManager):
 
 class Normal_user(AbstractUser):
     username = None
-    Addres = models.CharField(max_length=300)
     phone = models.CharField(max_length=250)
+    Addres = models.CharField(max_length=300)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -62,8 +63,8 @@ class Vip_user(Normal_user):
 
     )
 
-    Rate = models.FloatField()
     ConsoleModel = models.CharField(max_length=1, null=False, blank=False, choices=CONSOLE_MODEL)
+    Rate = models.FloatField()
 
     email = models.EmailField(unique=True)
     picture = models.ImageField(upload_to=model_image_directory_path)
