@@ -4,7 +4,7 @@ from django.db import models
 
 class Category (models.Model):
     name = models.CharField(max_length=100)
-    cat_parent = models.ForeignKey(to='Category',on_delete=models.CASCADE)
+    cat_parent = models.ForeignKey(to='Category',on_delete=models.CASCADE,blank=True,null=True)
 
 
 class Productbase(models.Model):
@@ -24,14 +24,14 @@ class Productbase(models.Model):
     added_time = models.DateTimeField(auto_now_add=True)
 
     def __str__ (self):
-        return self.name, self.description
+        return self.name
 
 
 class ImageProduct(models.Model):
     name = models.CharField(max_length=255)
     product = models.ForeignKey(Productbase, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='static/img/')
     default = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name, self.product
+        return self.name
