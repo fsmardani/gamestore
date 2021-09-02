@@ -19,9 +19,6 @@ class normalUserProfile(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
 
     class Meta:
-        '''
-        to set table name in database
-        '''
         db_table = "profile"
 
 
@@ -32,8 +29,5 @@ class vipUserProfile(models.Model):
     rate = models.IntegerField()
 
     class Meta:
-        '''
-        to set table name in database
-        '''
         db_table = "vip"
 
