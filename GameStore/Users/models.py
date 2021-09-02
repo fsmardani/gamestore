@@ -1,10 +1,36 @@
 from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 from utils.models_utils import model_image_directory_path
+from GameStore.cart_ordering.models import cart
 
-# Create your models here.
 
+
+class User(AbstractUser):
+    pass
+
+
+class PublicUser(models.Model):
+    pass
+
+class VipUser(models.Model):
+    pass
+
+
+
+
+
+
+
+
+
+class NormalProfile(models.Model):
+    django_user = models.OneToOneField(User)
+
+
+
+class VIPProfile(models.Model):
+    django_user = models.OneToOneField(User)
 
 
 
@@ -17,7 +43,9 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError('The Email must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, phone=phone, **extra_fields)
+        name = models.CharField(max_length=150)
+        #rate = models.ForeignKey(cart.sum_of_score)
+        user = self.model(email=email, phone=phone, **extra_fields)#########
         user.set_password(password)
         user.save()
         return user
@@ -38,37 +66,31 @@ class CustomUserManager(BaseUserManager):
 
 
 
+class Normal_user(CustomUserManager):
+    Address = models.CharField(max_length=500)
+    #username = None
+    #phone = models.CharField(max_length=250)
+    #USERNAME_FIELD = 'email'
+    #REQUIRED_FIELDS = []
+    #objects = CustomUserManager()
+    def __str__(self):
+        return self.user
 
 
 
 
-class Normal_user(AbstractUser):
-    username = None
-    phone = models.CharField(max_length=250)
-    Addres = models.CharField(max_length=300)
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-    objects = CustomUserManager()
-
-
-
-
-class Vip_user(Normal_user):
+class Vip_user(CustomUserManager):
     CONSOLE_MODEL = (
-        ("PS4",),
-        ("PS5",),
-        ("XBOX",),
-        ("NINTENDO_SWITCH",),
+        ("PS4","playstation4"),
+        ("PS5",'playstation5'),
+        ("XBOX",'Microsoft XBOX'),
+        ("NINTENDO_SWITCH" ,'NINTENDO_SWITCH'),
 
     )
 
-    ConsoleModel = models.CharField(max_length=1, null=False, blank=False, choices=CONSOLE_MODEL)
-    Rate = models.FloatField()
+    ConsoleModel = models.CharField(max_length=16, null=True, blank=True, choices=CONSOLE_MODEL)
 
-    email = models.EmailField(unique=True)
     picture = models.ImageField(upload_to=model_image_directory_path)
-    pointuser = models.IntegerField()
-    # Location =
+    Location = models.BooleanField(verbose_name="ساکن تهران")
 
 
