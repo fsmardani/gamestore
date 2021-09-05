@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 # Create your models here.
 
@@ -5,6 +7,9 @@ from django.db import models
 class Category (models.Model):
     name = models.CharField(max_length=100)
     cat_parent = models.ForeignKey(to='Category',on_delete=models.CASCADE,blank=True,null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Productbase(models.Model):
@@ -23,15 +28,17 @@ class Productbase(models.Model):
     price = models.FloatField(default=0.0)
     added_time = models.DateTimeField(auto_now_add=True)
 
+
     def __str__ (self):
         return self.name
 
 
-class ImageProduct(models.Model):
-    name = models.CharField(max_length=255)
-    product = models.ForeignKey(Productbase, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='static/img/')
-    default = models.BooleanField(default=False)
+def model_image_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
+    return f'{instance.__class__.__name__}/{instance.product.id}/{filename}'
 
-    def __str__(self):
-        return self.name
+
+class ImageProduct(models.Model):
+    product = models.ForeignKey(Productbase, on_delete=models.CASCADE, related_name='img')
+    image = models.ImageField(upload_to=model_image_directory_path)
+    default = models.BooleanField(default=False)

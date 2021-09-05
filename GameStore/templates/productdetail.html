@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+ <div id="content">
+      <div class="container">
+
+
+          <div class="col-md-12 ">
+                      <div class="row">
+                        <div class="col-md-12 single-post">
+                          <ul id="myTab" class="nav nav-tabs nav-justified">
+                            <li class="active"><a href="#detail" data-toggle="tab"><i class="fa fa-game-o"></i> مشخصات محصول</a></li>
+                            <li><a href="#location" data-toggle="tab"><i class="fa fa-paper-plane-o"></i>نظرات کاربران</a></li>
+                          </ul>
+
+                          <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="detail">
+                              <div class="row">
+
+                                  <div class="col-md-6"><h2>{{product.name}}</h2></div>
+                                  <div class="col-md-6">
+                                 <div class="property-cart">
+                                  <a href="#" class="btn btn-primary"><i class="fa fa-cart-o"></i>افزودن به سبد خرید &raquo;</a>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                  <div id="slider-property" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                      {% for img in product.img.all %}
+                                      <li data-target="#slider-property" data-slide-to="0" class="">
+                                        <img src="{{img.image.url}}">
+                                      </li>
+                                      {% endfor %}
+                                    </ol>
+                                    <div class="carousel-inner">
+                                      {% for img in product.img.all %}
+                                        {% if img.default %}
+                                        <div class="item active">
+                                          <img src="{{img.image.url}}" alt="">
+                                        </div>
+                                        {% else %}
+                                          <div class="item">
+                                            <img src="{{img.image.url}}" alt="">
+                                          </div>
+                                        {% endif %}
+                                      {% endfor %}
+                                    </div>
+                                    <a class="left carousel-control" href="#slider-property" data-slide="prev">
+                                      <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#slider-property" data-slide="next">
+                                      <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                  </div>
+                                  <h3>بررسی اجمالی محصول</h3>
+                                  <table class="table table-bordered">
+                                    <tr>
+                                      <td width="20%"><strong>نام محصول</strong></td>
+                                      <td>{{product.name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>نام فروشنده</strong></td>
+                                      <td>GameIn</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>قیمت</strong></td>
+                                      <td>{{product.price}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>نوع</strong></td>
+                                      <td>{{product.category}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>وضعیت</strong></td>
+                                      {% if product.stock %}
+                                        <td>دست دوم</td>
+                                      {% else %}
+                                        <td>نو</td>
+                                      {% endif %}
+                                    </tr>
+                                    <tr>
+
+                                  </table>
+                                  <!--
+                                  <h3>ویژگی های املاک<h3>
+                                  <div class="row">
+                                    <div class="col-md-4 col-sm-4">
+                                      <ul>
+                                        <li><i class="fa fa-check"></i> Air conditioning</li>
+                                        <li><i class="fa fa-check"></i> Balcony</li>
+                                        <li><i class="fa fa-times"></i> Bedding</li>
+                                        <li><i class="fa fa-check"></i> Cable TV</li>
+                                        <li><i class="fa fa-times"></i> Cleaning after exit</li>
+                                        <li><i class="fa fa-check"></i> Cofee pot</li>
+                                        <li><i class="fa fa-check"></i> Computer</li>
+                                        <li><i class="fa fa-times"></i> Cot</li>
+                                      </ul>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                      <ul>
+                                        <li><i class="fa fa-check"></i> Internet</li>
+                                        <li><i class="fa fa-times"></i> Iron</li>
+                                        <li><i class="fa fa-check"></i> Juicer</li>
+                                        <li><i class="fa fa-times"></i> Lift</li>
+                                        <li><i class="fa fa-times"></i> Microwave</li>
+                                        <li><i class="fa fa-check"></i> Oven</li>
+                                        <li><i class="fa fa-times"></i> Parking</li>
+                                        <li><i class="fa fa-times"></i> Parquet</li>
+                                      </ul>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                      <ul>
+                                        <li><i class="fa fa-times"></i> Radio</li>
+                                        <li><i class="fa fa-check"></i> Roof terrace</li>
+                                        <li><i class="fa fa-times"></i> Smoking allowed</li>
+                                        <li><i class="fa fa-check"></i> Terrace</li>
+                                        <li><i class="fa fa-times"></i> Toaster</li>
+                                        <li><i class="fa fa-check"></i> Towelwes</li>
+                                        <li><i class="fa fa-check"></i> Use of pool</li>
+                                        <li><i class="fa fa-check"></i> Video</li>
+                                      </ul>
+                                    </div>
+
+                                  -->
+
+                                  <h3>توضیحات محصول</h3>
+                                    <p>{{product.description}}</p>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                            </div>
+                            <!-- break -->
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- end:article -->
+          </div>
+{% endblock content%}

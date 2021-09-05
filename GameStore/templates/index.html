@@ -1,7 +1,140 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="main-page" >
+
+ <div id="header" class="header-slide">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="quick-search">
+              <div class="row">
+                <form role="form" method="GET" action="{% url 'product-list' %}">
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      <label for="device">کنسول</label>
+                      <select class="form-control" name="device">
+                        <option>PS4</option>
+                        <option>PS5</option>
+                        <option>Xbox</option>
+                        <option>Nintendo switch</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <!-- break >
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      <label for="location">محل</label>
+                      <select class="form-control">
+                        <option>تاسمانی</option>
+                        <option>یوگیاکارتا</option>
+                        <option>توکیو</option>
+                        <option>بوسان</option>
+                        <option>تایپه</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="bathroom">حمام</label>
+                      <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- break -->
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+
+                   <div class="form-group" >
+                      <label for="cat">دسته بندی</label>
+                      <select class="form-control" name="cat">
+                        <option>بازی</option>
+                        <option>لوازم جانبی</option>
+                        <option>کنسول</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      <label for="pmin">(تومان)هزینه حداقل</label>
+                      <select class="form-control" name="pmin">
+                        <option>نامحدود</option>
+                        <option>10000</option>
+                        <option>100000</option>
+                        <option>500000</option>
+                        <option>1000000</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- break -->
+                  <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group" >
+                      <label for="pmax">(تومان)حداکثر هزینه</label>
+                      <select class="form-control" name="pmax">
+                        <option>نامحدود</option>
+                        <option>100000</option>
+                        <option>500000</option>
+                        <option>1000000</option>
+                        <option>10000000</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      <label for="stock">وضعیت</label>
+                      <select class="form-control" name="stock">
+                        <option>نو</option>
+                        <option>دست دوم</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12"><input type="submit" name="submit" value="جستجو" class="btn btn-primary btn-lg btn-block"></div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- end:header -->
 
 </div>
+ <div id="content">
+      <div class="container">
+        <!-- begin:latest -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="heading-title">
+              <h2>آخرین محصولات</h2>
+            </div>
+          </div>
+        </div>
+        {% for product in products %}
+        <div class="column">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="property-container">
+              <div class="property-image">
+                {% for image in product.img.all %}
+                  {% if image.default %}
+                    <a href="{%url 'product-detail' product.pk %}" ><img src="{{image.image.url}}"> </a>
+                  {% endif %}
+                {% endfor %}
+                <div class="property-price">
+                  <h4>{{product.name}}</h4>
+                  <span>{{product.price}} تومان</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+              </div>
+      </div>
+ </div>
+
 {% endblock content %}

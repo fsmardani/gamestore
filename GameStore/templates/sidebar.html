@@ -1,0 +1,40 @@
+<div class="col-md-3 col-md-9 sidebar">
+   <!--div class="widget-white favorite">
+      <a href="#"><i class="fa fa-heart"></i> اضافه نمودن به علاقه مندی ها</a>
+    </div -->
+    <!-- break -->
+    <div class="widget widget-sidebar widget-white">
+      <div class="widget-header">
+        <h3>آخرین محصولات</h3>
+      </div>
+      <ul>
+        {% for product in products %}
+          <a href="#"><li>{{product.name}}</li></a>
+        {% endfor %}
+      </ul>
+    </div>
+    <!-- break -->
+    <div class="widget widget-sidebar widget-white">
+      <div class="widget-header">
+        <h3>دسته‌بندی</h3>
+      </div>
+      <ul class="list-check">
+        <!--li><a href="#">دفتر</a>&nbsp;(18)</li-->
+         {% for cat in cats %}
+          <a href="#"><li>{{cat.name}}</li></a>
+         {% endfor %}
+      </ul>
+    </div>
+    <!-- break -->
+    <div class="widget widget-sidebar widget-white">
+      <div class="widget-header">
+        <h3>فروشندگان</h3>
+      </div>
+      <ul>
+        <li><a href="#">GameIn</a></li>
+      </ul>
+    </div>
+    <!-- break -->
+  </div>
+
+  <!-- end:sidebar -->
