@@ -11,7 +11,7 @@
                       <div class="row">
                         <div class="col-md-12 single-post">
                           <ul id="myTab" class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#detail" data-toggle="tab"><i class="fa fa-game-o"></i> مشخصات محصول</a></li>
+                            <li class="active"><a href="#detail" data-toggle="tab"><i class="fa fa-gamepad"></i> مشخصات محصول </a></li>
                             <li><a href="#location" data-toggle="tab"><i class="fa fa-paper-plane-o"></i>نظرات کاربران</a></li>
                           </ul>
 
@@ -35,17 +35,23 @@
                                       {% endfor %}
                                     </ol>
                                     <div class="carousel-inner">
-                                      {% for img in product.img.all %}
-                                        {% if img.default %}
-                                        <div class="item active">
-                                          <img src="{{img.image.url}}" alt="">
-                                        </div>
+                                      {% if product.img.all %}
+                                          {% for img in product.img.all %}
+                                            {% if img.default %}
+                                            <div class="item active">
+                                              <img src="{{img.image.url}}" alt="">
+                                            </div>
+                                            {% else %}
+                                              <div class="item">
+                                                <img src="{{img.image.url}}" alt="">
+                                              </div>
+                                            {% endif %}
+                                          {% endfor %}
                                         {% else %}
-                                          <div class="item">
-                                            <img src="{{img.image.url}}" alt="">
-                                          </div>
+                                            <div class="item active">
+                                             <img src="{%static 'img/Capture.jpg' %}">
+                                            </div>
                                         {% endif %}
-                                      {% endfor %}
                                     </div>
                                     <a class="left carousel-control" href="#slider-property" data-slide="prev">
                                       <span class="glyphicon glyphicon-chevron-right"></span>

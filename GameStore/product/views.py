@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView
 from django.db.models import Q
 
 def index(request):
-    products = Productbase.objects.all().order_by('added_time')[:4]
+    products = Productbase.objects.all().order_by('-added_time')[:4]
     categories=Category.objects.all()
     context = {'products': products,
                'cats': categories

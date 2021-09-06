@@ -21,29 +21,6 @@
                     </div>
 
                   </div>
-                  <!-- break >
-                  <div class="col-md-6 col-sm-6 col-xs-6">
-                    <div class="form-group">
-                      <label for="location">محل</label>
-                      <select class="form-control">
-                        <option>تاسمانی</option>
-                        <option>یوگیاکارتا</option>
-                        <option>توکیو</option>
-                        <option>بوسان</option>
-                        <option>تایپه</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="bathroom">حمام</label>
-                      <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!-- break -->
                   <div class="col-md-6 col-sm-6 col-xs-6">
 
                    <div class="form-group" >
@@ -102,6 +79,65 @@
     <!-- end:header -->
 
 </div>
+  <!-- begin:service -->
+    <div id="service">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>لورم ایپسوم متن ساختگی با تولید  <small>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت</small></h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-container">
+              <div class="service-icon">
+                <a href="#"><i class="fa fa-home"></i></a>
+              </div>
+              <div class="service-content">
+                <h3>لورم ایپسوم متن ساختگی با تولید </h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+              </div>
+            </div>
+          </div>
+          <!-- break -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-container">
+              <div class="service-icon">
+                <a href="#"><i class="fa fa-thumbs-up"></i></a>
+              </div>
+              <div class="service-content">
+                <h3>لورم ایپسوم متن ساختگی با تولید </h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+              </div>
+            </div>
+          </div>
+          <!-- break -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-container">
+              <div class="service-icon">
+                <a href="#"><i class="fa fa-umbrella"></i></a>
+              </div>
+              <div class="service-content">
+                <h3>لورم ایپسوم متن ساختگی با تولید </h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+              </div>
+            </div>
+          </div>
+          <!-- break -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-container">
+              <div class="service-icon">
+                <a href="#"><i class="fa fa-lock"></i></a>
+              </div>
+              <div class="service-content">
+                <h3>لورم ایپسوم متن ساختگی با تولید </h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
  <div id="content">
       <div class="container">
         <!-- begin:latest -->
@@ -117,11 +153,17 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="property-container">
               <div class="property-image">
-                {% for image in product.img.all %}
-                  {% if image.default %}
-                    <a href="{%url 'product-detail' product.pk %}" ><img src="{{image.image.url}}"> </a>
-                  {% endif %}
-                {% endfor %}
+                {% if product.img.all %}
+                  {% for image in product.img.all %}
+                    {% if image.default %}
+                      <a href="{%url 'product-detail' product.pk %}" ><img src="{{image.image.url}}"> </a>
+                    {% else %}
+                      <a href="{%url 'product-detail' product.pk %} " ><img src="{%static 'img/Capture.jpg'  %}"> </a>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                      <a href="{%url 'product-detail' product.pk %} " ><img src="{%static 'img/Capture.jpg'  %}"> </a>
+                {% endif %}
                 <div class="property-price">
                   <h4>{{product.name}}</h4>
                   <span>{{product.price}} تومان</span>

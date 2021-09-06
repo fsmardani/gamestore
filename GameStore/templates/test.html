@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="product-img" >
+     {% for product in products %}
+        <div class="column">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="property-container">
+              <div class="property-image">
+                {% for image in product.img.all %}
+                  {% if image.default %}
+                    <img src="{{image.image.url}}" alt="{{image.image.url}}">
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+     {% endfor %}
+</div>
+{% endblock content %}
