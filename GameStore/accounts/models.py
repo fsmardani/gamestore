@@ -9,7 +9,7 @@ class normalUserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True,on_delete=models.CASCADE, related_name='profile')
     #first_name = models.CharField(max_length=50, unique=False)
     #last_name = models.CharField(max_length=50, unique=False)
-    phone_number = models.CharField(max_length=10,  null=True, blank=True)
+    phone_number = models.CharField(max_length=10, null=True, blank=True)
     age = models.PositiveIntegerField(null=True, blank=True)
     GENDER_CHOICES = (
         ('M', 'Male'),
