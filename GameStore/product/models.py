@@ -1,5 +1,5 @@
 import os
-from accounts.models import vipUserProfile
+from users.models import vipUserProfile
 from django.db import models
 # Create your models here.
 

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'product',
     'users',
-    'accounts',
+   # 'accounts',
     'django_extensions'
 ]
 
