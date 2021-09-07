@@ -1,5 +1,5 @@
 import os
-
+from accounts.models import vipUserProfile
 from django.db import models
 # Create your models here.
 
@@ -27,10 +27,18 @@ class Productbase(models.Model):
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
     price = models.FloatField(default=0.0)
     added_time = models.DateTimeField(auto_now_add=True)
-
+    seller = models.ForeignKey(to=vipUserProfile ,on_delete=models.CASCADE)
 
     def __str__ (self):
         return self.name
+
+class ProductFeatures(models.Model):
+    product = models.ForeignKey(to=Productbase ,on_delete=models.CASCADE,related_name='fields')
+    field_name = models.CharField(max_length=255)
+    field = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f'{self.product.name}-{self.field_name}'
 
 
 def model_image_directory_path(instance, filename):

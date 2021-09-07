@@ -41,3 +41,5 @@ class vipUserProfile(models.Model):
     class Meta:
         db_table = "vip"
 
+    def __str__(self):
+        return self.user.user.email

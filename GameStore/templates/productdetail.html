@@ -68,7 +68,7 @@
                                     </tr>
                                     <tr>
                                       <td><strong>نام فروشنده</strong></td>
-                                      <td>GameIn</td>
+                                      <td>{{product.seller.user.user.first_name}} {{product.seller.user.user.last_name}}</td>
                                     </tr>
                                     <tr>
                                       <td><strong>قیمت</strong></td>
@@ -86,7 +86,12 @@
                                         <td>نو</td>
                                       {% endif %}
                                     </tr>
+                                      {% for field in product.fields.all %}
                                     <tr>
+                                      <td><strong>{{field.field_name}}</strong></td>
+                                      <td>{{field.field}}</td>
+                                    </tr>
+                                      {% endfor %}
 
                                   </table>
                                   <!--
