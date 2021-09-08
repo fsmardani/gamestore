@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+ <div id="content">
+
+      <div class="container">
+{#      <h1>sasasasasasasasas</h1>#}
+{#      <h1>{{ cart }}</h1>#}
+
+      {% for cid in cutt %}
+{#        <h3>{{ cid.cartinf.all.values}}</h3>#}
+            <hr>
+          <p>{{ cid }}</p>
+          <hr>
+        <p>{{ cid.buyer_user }}</p>
+        <p>{{ cid.cart_id }}</p>
+        <p>{{ cid.product_ID }}</p>
+        <p>{{ cid.seller_user }}</p>
+{#        <p>{{ comment.comment }}</p>#}
+    {% endfor %}
+
+      </div><!-- end:article -->
+ </div>
+{% endblock content%}
