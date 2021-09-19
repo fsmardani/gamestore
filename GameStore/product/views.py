@@ -1,17 +1,9 @@
 import re
-
+from django.core.cache import cache
 from django.shortcuts import render
 from .models import Productbase,Category
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
-
-def index(request):
-    products = Productbase.objects.all().order_by('-added_time')[:4]
-    categories=Category.objects.all()
-    context = {'products': products,
-               'cats': categories
-               }
-    return render (request,'index.html',context=context)
 
 
 class ProductList(ListView):
@@ -63,6 +55,21 @@ class ProductDetail(DetailView):
     model = Productbase
     template_name = "productdetail.html"
     context_object_name = "product"
+
+    def get_context_data(self, **kwargs):
+        self.request.session["product_visit"] = self.request.session.get("product_visit", [])
+        print(self.request.session["product_visit"])
+        if self.kwargs['pk'] not in self.request.session["product_visit"]:
+            self.request.session["product_visit"].append(self.kwargs['pk'])
+            self.request.session.set_expiry(60*60*24)
+            if not cache.get(f"product_visit_{self.kwargs['pk']}"):
+                cache.set(f"product_visit_{self.kwargs['pk']}", 0)
+            counter = cache.get(f"product_visit_{self.kwargs['pk']}") + 1
+            print(counter)
+            cache.set(f"product_visit_{self.kwargs['pk']}", counter)
+        context = super().get_context_data(**kwargs)
+        context['daily_view'] = cache.get(f"product_visit_{self.kwargs['pk']}")
+        return context
 
 
 def test(request):
