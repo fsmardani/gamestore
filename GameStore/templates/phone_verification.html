@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+ <form action="{% url 'phone_register' %}" method="post">
+                <p align='center'>
+                {% csrf_token %}
+                <input type="text" name="code" class="form-control input-lg" id="" placeholder="کد تایید">
+                <br>
+                    <input type="submit" class="btn btn-primary btn-block btn-lg" value="ثبت نام">
+                </p></form>
+</div>
+{% endblock content %}

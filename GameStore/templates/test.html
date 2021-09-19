@@ -1,23 +1,30 @@
-
-{% extends "base.html" %}
 {% load static %}
-{% block content %}
+{% load render_partial %}
+{% include 'partials/load_start.html'%}
 
-<div class="product-img" >
-     {% for product in products %}
-        <div class="column">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="property-container">
-              <div class="property-image">
-                {% for image in product.img.all %}
-                  {% if image.default %}
-                    <img src="{{image.image.url}}" alt="{{image.image.url}}">
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        </div>
-     {% endfor %}
-</div>
-{% endblock content %}
+<html lang="fa">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>GAMEIN</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <!--script src="{% static 'js/html5shiv.js' %}"></script>
+      <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+  </head>
+  <body id="top">
+ <!-- begin:navbar -->
+    {% render_partial 'header'%}
+    {% block content %}
+
+    {% endblock content %}
+    {% render_partial 'footer'%}
+
+  </body>
+</html>

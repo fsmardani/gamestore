@@ -1,5 +1,5 @@
 import os
-from users.models import vipUserProfile
+from users.models import SupplierProfile
 from django.db import models
 # Create your models here.
 
@@ -27,18 +27,27 @@ class Productbase(models.Model):
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
     price = models.FloatField(default=0.0)
     added_time = models.DateTimeField(auto_now_add=True)
-    seller = models.ForeignKey(to=vipUserProfile ,on_delete=models.CASCADE)
+    seller = models.ForeignKey(to=SupplierProfile ,on_delete=models.CASCADE)
 
     def __str__ (self):
         return self.name
 
-class ProductFeatures(models.Model):
-    product = models.ForeignKey(to=Productbase ,on_delete=models.CASCADE,related_name='fields')
-    field_name = models.CharField(max_length=255)
-    field = models.CharField(max_length=255)
+
+class Cat_attr(models.Model):
+    category = models.ForeignKey(to=Category,on_delete=models.CASCADE)
+    attr_name = models.CharField(max_length=255)
 
     def __str__(self):
-        return f'{self.product.name}-{self.field_name}'
+        return self.attr_name
+
+
+class Product_attr(models.Model):
+    product = models.ForeignKey(to=Productbase,on_delete=models.CASCADE)
+    cat_attr = models.ForeignKey(to=Cat_attr,on_delete=models.CASCADE)
+    attr = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.attr
 
 
 def model_image_directory_path(instance, filename):

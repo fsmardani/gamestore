@@ -1,0 +1,246 @@
+{% load static %}
+
+
+<html lang="fa">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>GAMEIN</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,600,800' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link href="{% static 'js/script.js' %}" >
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <!--script src="{% static 'js/html5shiv.js' %}"></script>
+      <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+  </head>
+  <body id="top">
+ <!-- begin:navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-top">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'index' %}"><span>Game<strong>IN</strong></span></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-top" >
+          <ul class="nav navbar-nav navbar-right">
+            <!--li class="active"><a href="index.html">    صفحه اصلی</a></li-->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">محصولات <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'product-list' %}">همه‌ی محصولات </a></li>
+
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">بلاگ <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="blog.html">آرشیو وبلاگ</a></li>
+                <li><a href="blog_single.html">وبلاک تک صفحه ای</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="contact.html">تماس با ما</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-left">
+              {% if user.is_authenticated %}
+              <li><a href="" class="cart-nav" >سبد خرید (۳)  <div class="btn btn-primary"><strong><i class="fa fa-shopping-cart"></i></strong></div></a></li>
+
+              <li><a href=""  class="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{user.first_name}}سلام <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'dashboard' %}">پروفایل </a></li>
+                <li><a href="{% url 'logout' %}">خروج </a></li>
+              </ul>
+              </li>
+            <!--li><a href="#" class="signup" data-toggle="modal" data-target="#modal-signup">ثبت نام</a></li-->
+              {% else %}
+            <li><a href="" class="cart-nav" >سبد خرید (۳)  <div class="btn btn-primary"><strong><i class="fa fa-shopping-cart"></i></strong></div></a></li>
+            <li><a href="#modal-signin" class="signin" data-toggle="modal" data-target="#modal-signin">ورود به سایت</a></li>
+
+            <li><a href="#" class="signup" data-toggle="modal" data-target="#modal-signup">ثبت نام</a></li>
+              {% endif %}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+    <!-- end:navbar -->
+
+    {% block content %}
+
+    {% endblock content %}
+
+    <!-- begin:footer -->
+    <div id="footer">
+
+
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="widget">
+              <h3>محصولات جدید</h3>
+              <ul class="list-unstyled">
+                {% for product in products %}
+                <li><a href="#">{{product.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <!-- break -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="widget">
+              <h3>لورم ایپسوم متن ساختگی</h3>
+              <ul class="list-unstyled">
+                <li><a href="#">Lorenso</a></li>
+                <li><a href="#">Bardiman</a></li>
+                <li><a href="#">Tarjono noto boto limo</a></li>
+                <li><a href="#">Surti</a></li>
+                <li><a href="#">Ngatinem</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- break -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="widget">
+              <h3>ویژگی ها</h3>
+              <ul class="list-unstyled">
+                <li><a href="#">My Account</a></li>
+                <li><a href="#">How To</a></li>
+                <li><a href="#">Market Trend</a></li>
+                <li><a href="#">Android App</a></li>
+                <li><a href="#">IOS App</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- break -->
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="widget">
+              <h2>GameIn</h2>
+              <address>
+                <strong>GameIn</strong><br>
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم <br>
+                <br>
+                Telp. : +98-123456789<br>
+                Email : Info@Barnamenevisan.Org
+              </address>
+            </div>
+          </div>
+          <!-- break -->
+
+        <!-- break -->
+
+        <!-- begin:copyleft -->
+        <div class="row">
+          <div class="col-md-12 copyleft">
+            <p>FAMA</p>
+
+            <a href="{%url 'index' %}" class="btn btn-primary scroltop"><i class="fa fa-angle-up"></i></a>
+            <!--ul class="list-inline social-links">
+              <li><a href="#" class="icon-twitter" rel="tooltip" title="" data-placement="bottom" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" class="icon-facebook" rel="tooltip" title="" data-placement="bottom" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="icon-gplus" rel="tooltip" title="" data-placement="bottom" data-original-title="Gplus"><i class="fa fa-google-plus"></i></a></li>
+            </ul-->
+          </div>
+        </div>
+        <!-- end:copyleft -->
+    </div>
+ </div>
+
+    <!-- end:footer -->
+      <div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="modal-signup" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">ثبت نام</h4>
+          </div>
+          <div class="modal-body">
+            <form action="{% url 'register' %}" method="post">
+                <p align='center'>
+                {% csrf_token %}
+                <input type="text" name="firstname" class="form-control input-lg" id="" placeholder="First name">
+                <br>
+                {% csrf_token %}
+                <input type="text" name="lastname" class="form-control input-lg" id="" placeholder="Last name">
+                <br>
+                {% csrf_token %}
+                <input type="email" name="email" class="form-control input-lg" id="" placeholder="Email">
+                <br>
+                {% csrf_token %}
+                <input type="text" name="username" class="form-control input-lg" id="" placeholder="Username">
+                <br>
+                {% csrf_token %}
+                <input type="password" name="password" class="form-control input-lg" id="" placeholder="Password">
+                <br>
+                {% csrf_token %}
+                <input type="password" name="repassword" class="form-control input-lg" id="" placeholder="Re-Password">
+                <br><br>
+                  <div class="modal-footer">
+                    <p>آیا ثبت نام کرده اید؟ <a href="#modal-signin" data-toggle="modal" data-target="#modal-signin">ورود به سایت.</a></p>
+                    <input type="submit" class="btn btn-primary btn-block btn-lg" value="ثبت نام">
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      </div>
+ <!-- begin:modal-signin -->
+  <div class="modal fade" id="modal-signin" tabindex="-1" role="dialog" aria-labelledby="modal-signin" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Sign in</h4>
+          </div>
+          <div class="modal-body">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <p align='center' >
+                <input type="text" name="username" class="form-control input-lg" id="" placeholder="Username">
+                <br>
+                    {% csrf_token %}
+                <input type="password" name="password" class="form-control input-lg" id="" placeholder="Pawwsord">
+                <br><br>
+                <div class="modal-footer">
+                  <p>آیا ثبت نام نکرده اید ? <a href="#modal-signup"  data-toggle="modal" data-target="#modal-signup">ثبت نام</a></p>
+                  <input type="submit" class="btn btn-primary btn-block btn-lg" value="ورود به سایت">
+                </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- end:modal-signin -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+    <script src="{% static 'js/gmap3.min.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.js' %}"></script>
+    <script src="{% static 'js/jquery.jcarousel.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.backstretch.js' %}"></script>
+    <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>
