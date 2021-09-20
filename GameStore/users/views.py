@@ -51,7 +51,9 @@ def login_view(request):
                             messages.error(request, 'نام کاربری یا رمز اشتباه')
                             return redirect("/")
                     else:
-                        return HttpResponse("not verified")
+                        user = User.objects.filter(username__iexact=username)[0]
+                        context = {'user': user.id}
+                        return render(request,'regenrate_email_vrification.html',context)
         else:
             messages.warning(request, 'نام کاربری الزامی ست')
             return redirect("/")
@@ -95,8 +97,9 @@ def signup(request):
                     else:
                         return HttpResponse("عدم انطباق پسوورد")
             else:
-                return HttpResponse("این نام کاربری قبلا ثبت شده است")
-
+                user=User.objects.filter(username__iexact=username)[0]
+                context={'user': user.id}
+                return render(request,'regenrate_email_vrification.html',context)
 
 def email_activate(request, uidb64, token):
     try:
@@ -112,8 +115,31 @@ def email_activate(request, uidb64, token):
         user.save()
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
-        return HttpResponse('Activation link is invalid!')
+        user = User.objects.filter(id=uid)[0]
+        context = {'user': user.id}
+        return render(request,'regenrate_email_vrification.html',context)
 
+def re_gen_email_activate(request,user):
+    user = User.objects.get(id=user)
+    try:
+        current_site = get_current_site(request)
+        mail_subject = 'Activate your account in GameIN.'
+        message = render_to_string('email_verification.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.id)),
+            'token': account_activation_token.make_token(user),
+        })
+        to_email = [user.email]
+        send_mail(mail_subject, message, settings.EMAIL_HOST_USER, to_email)
+        # return HttpResponse('Please confirm your email address to complete the registration')
+        messages.success(request, "Please confirm your email address to complete the registration'")
+        return redirect('/')
+
+    except IntegrityError as e:
+    # return render(request, "user/error.html", {"message": e})
+        messages.error(request, f"{e}")
+        return redirect('/')
 
 def dashboard(request):
     return render(request,'dashboard.html')

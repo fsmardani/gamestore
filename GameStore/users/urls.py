@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import login_view,logout_view,email_activate,signup,phone_register,dashboard,supplier_register
+from .views import login_view,logout_view,email_activate,signup,phone_register,dashboard,supplier_register,re_gen_email_activate
 
 
 
@@ -13,6 +13,7 @@ urlpatterns = [
     path('activate/<str:uidb64>/<str:token>', email_activate, name='activate'),
     path('phone_register/',phone_register,name='phone_register'),
     path('supplier_register/',supplier_register,name='supplier_register'),
+    path('email_reactive/<int:user>',re_gen_email_activate,name='email_reactive'),
 
 
 ]
