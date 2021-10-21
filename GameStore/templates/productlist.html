@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+
+<div id="content">
+     <div class="column">
+   <div>
+    {% include "sidebar.html" %}
+  </div>
+  </div>
+    <div class="container">
+
+
+        {% for product in products %}
+
+        <div class="column">
+
+          <div class="col-md-4 col-sm-9 col-xs-12 card-proper">
+
+            <div class="property-container">
+              <div class="property-image">
+                  {% if product.img.all %}
+                    {% for image in product.img.all %}
+                      {% if image.default %}
+                        <a href="{%url 'product-detail' product.pk %} " ><img src="{{image.image.url}}"> </a>
+                      {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    <a href="{%url 'product-detail' product.pk %} " ><img src="{%static 'img/Capture.jpg'  %}"> </a>
+                  {% endif %}
+                <div class="property-price">
+                  <h4>{{product.name}}</h4>
+                  <span>{{product.price}} تومان</span>
+                </div>
+                <div class="property-status">
+                  {% if product.stock %}
+                    <span>دست دوم</span>
+                  {% else %}
+                    <span>نو</span>
+                  {% endif %}
+                </div>
+                <div class="property-detail">
+                <a href="{%url 'product-detail' product.pk %}" class="btn btn-success">جزئیات بیشتر&raquo;</a>
+                    <a href="{%url 'product-detail' product.pk %}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> افزودن به سبد خرید</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        </div>
+</div>
+ <!-- begin:product >
+
+            <div class="column container-realestate">
+              {% for product in products %}
+              <div class="col-md-3 col-sm-6col-xs-3">
+                <div class="property-container">
+                  <div class="property-content-list">
+                    <div class="property-image-list">
+                      {% for image in product.img.all %}
+                  {% if image.default %}
+                    <a href="{%url 'product-detail' product.pk %} " ><img src="{{image.image.url}}"> </a>
+                  {% endif %}
+                {% endfor %}
+
+                      <div class="property-price">
+                        <h4>{{product.category}}</h4>
+                        <span>{{product.price}}<small>تومان</small></span>
+                      </div>
+                      <div class="property-status">
+                        {% if product.stock %}
+                          <span>دست دوم</span>
+                        {% else %}
+                          <span>نو</span>
+                        {% endif %}
+
+                      </div>
+
+                    </div>
+                    <div class="property-text">
+                      <h3><a href="{%url 'product-detail' product.pk %}">{{product.name}}</a> <small>seller here</small></h3>
+                      <p><a href="{%url 'product-detail' product.pk %}" class="btn btn-primary">جزوئیات بیشتر &raquo;</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       {% endfor %}
+
+
+              <!-- break -->
+{% endblock content %}
